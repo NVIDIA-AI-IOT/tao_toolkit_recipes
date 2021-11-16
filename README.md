@@ -3,4 +3,4 @@ This repository provides reference samples of data generation and tensorrt infer
 
 The supported task:
 
-- [Action Recognition](Link)
+- [Action Recognition](https://github.com/NVIDIA-AI-IOT/tao_toolkit_recipes/tree/main/tao_action_recognition)

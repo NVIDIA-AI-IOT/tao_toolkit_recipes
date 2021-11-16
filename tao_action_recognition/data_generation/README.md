@@ -17,7 +17,7 @@ This projects contains the sample scripts to generate dataset to proper format u
 pip install xmltodict opencv-python
 ```
 
-And we use the sample application `AppOFCuda` in Nvidia optical flow [SDK]() to generate optical flow of frames. You could get this app by compiling by yourself or download the compiled binary in on [NGC](). 
+And we use the sample application `AppOFCuda` in Nvidia optical flow [SDK](https://developer.nvidia.com/opticalflow-sdk) to generate optical flow of frames. You could get this app by compiling by yourself or download the compiled binary in on [NGC](https://catalog.ngc.nvidia.com/orgs/nvidia/teams/tao/resources/cv_samples/version) (It is packaged with action recognition notebook). 
 
 ## Steps to generate dataset for TAO ActionRecognitionNet
 We provide 3 all_in_one scripts:
