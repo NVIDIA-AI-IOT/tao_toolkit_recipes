@@ -51,7 +51,20 @@ $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock mcr.microsoft
 }
 
 
-Run tao training, for example
+
+Run below command to pull 4 kinds of tao dockers.
+
+# docker pull nvcr.io/nvidia/tao/tao-toolkit-tf:v3.21.11-tf1.15.4-py3
+
+# docker pull nvcr.io/nvidia/tao/tao-toolkit-tf:v3.21.11-tf1.15.5-py3
+
+# docker pull nvcr.io/nvidia/tao/tao-toolkit-pyt:v3.21.11-py3
+
+# docker pull nvidia/tao/tao-toolkit-lm:v3.21.08-py3
+
+
+
+(Optional) Run tao training, for example
 
 # tao classification train -k nvidia_tlt -r /workspace/demo/result -e /workspace/demo/classification_spec.cfg
 
@@ -59,7 +72,7 @@ Run tao training, for example
 
 
 
-Open another terminal in the 1st machine,  save the new_azure docker and 2 tf dockers into files.
+Open another terminal in the 1st machine,  save the new_azure docker and 4 kinds of tao dockers into files.
 
 $  docker ps
 
@@ -67,15 +80,19 @@ $  docker commit  <CONTAINER ID of mcr.microsoft.com/azureml/openmpi4.1.0-cuda11
 
 $  docker save -o new_azure_version_1.tar.gz  new_azure:version_1
 
-$  docker save -o tao-toolkit-tf-v3.21.11-tf1.15.5-py3.tar.gz nvcr.io/nvidia/tao/tao-toolkit-tf:v3.21.11-tf1.15.4-py3
+$  docker save -o tao-toolkit-tf-v3.21.11-tf1.15.5-py3.tar.gz nvcr.io/nvidia/tao/tao-toolkit-tf:v3.21.11-tf1.15.5-py3
 
 $  docker save -o tao-toolkit-tf-v3.21.11-tf1.15.4-py3.tar.gz nvcr.io/nvidia/tao/tao-toolkit-tf:v3.21.11-tf1.15.4-py3
 
+$  docker save -o tao-toolkit-pyt-v3.21.11-py3.tar.gz  nvcr.io/nvidia/tao/tao-toolkit-pyt:v3.21.11-py3
+
+$  docker save -o tao-toolkit-lm-v3.21.08-py3.tar.gz   nvcr.io/nvidia/tao/tao-toolkit-lm:v3.21.08-py3
 
 
 
 
-Copy above 3 tar.gz files into the 2nd machine which has no internet.
+
+Copy all the tar.gz files into the 2nd machine which has no internet.
 
 $ docker load -i new_azure_version_1.tar.gz
 
@@ -83,6 +100,9 @@ $ docker load -i tao-toolkit-tf-v3.21.11-tf1.15.4-py3.tar.gz
 
 $ docker load -i tao-toolkit-tf-v3.21.11-tf1.15.5-py3.tar.gz
 
+$ docker load -i tao-toolkit-pyt-v3.21.11-py3.tar.gz
+
+$ docker load -i tao-toolkit-lm-v3.21.08-py3.tar.gz
 
 
 Copy the training dataset into below path of the 2nd machine. If the path is not available, please generate the same as the 1st machine.
