@@ -1,14 +1,14 @@
-===Guide==
+===Guide===
 
-In the 1st machine which can connect to internet, assume the training data locates at demo folder as below path.
+In the 1st machine which can connect to internet, assume the training data locates at below path.
 
-/home/username/demo
+/home/username/
 
 
 
 $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock mcr.microsoft.com/azureml/openmpi4.1.0-cuda11.1-cudnn8-ubuntu18.04 /bin/bash
 
-# mkdir /home/username    (Note: make sure the username is the same as your above)
+# mkdir /home/username    (Note: make sure the username is the same as above)
 
 # apt-get update
 
@@ -21,8 +21,6 @@ $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock mcr.microsoft
 # pip3 install nvidia-tao
 
 # curl -sSL https://get.docker.com/ | sh
-
-# docker login --username=\$oauthtoken --password="bHZkcTBybDZkYTlqZ25hMWlkNjBmMG1uaXQ6M2JiZDAxYzItYmY5MS00NjE0LTlmMmUtMWRiYjNiYTdjZDg2" nvcr.io
 
 # docker login --username=\$oauthtoken --password="your_ngc_key"  nvcr.io
 
@@ -93,10 +91,9 @@ Copy the training dataset into below path of the 2nd machine. If the path is not
 
 
 
-Login the docker
+In the 2nd machine, login the new azure docker
 
 $ docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock new_azure:version_1 /bin/bash
 
 
-
-Run training.
+Then run training.
