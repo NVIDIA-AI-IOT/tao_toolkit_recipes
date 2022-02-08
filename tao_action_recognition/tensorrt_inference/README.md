@@ -18,7 +18,7 @@ wget --content-disposition https://api.ngc.nvidia.com/v2/models/nvidia/tao/actio
 # generate engine of 2D model:
 tao-converter resnet18_2d_rgb_hmdb5_32.etlt -k nvidia_tao -p input_rgb,1x96x224x224,1x96x224x224,1x96x224x224 -e trt2d.engine -t fp16
 # generate engine of 3D model:
-tao-converter resnet18_3d_rgb_hmdb5_32.etlt -k nvidia_tao -p input_rgb,1x96x224x224,1x96x224x224,1x96x224x224 -e trt3d.engine -t fp16
+tao-converter resnet18_3d_rgb_hmdb5_32.etlt -k nvidia_tao -p input_rgb,1x3x32x224x224,1x3x32x224x224,1x3x32x224x224 -e trt3d.engine -t fp16
 
 # run inference:
 # run inference with 2D engine:
@@ -26,4 +26,3 @@ python ar_trt_inference.py --input_images_folder=/path/to/images --trt_engine=./
 # run inference with 3D engine:
 python ar_trt_inference.py --input_images_folder=/path/to/images --trt_engine=./trt3d.engine
 ```
- 
