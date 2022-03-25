@@ -29,14 +29,14 @@ model_config:
 
 In the above config, the `backbone` is set to `i3d`, `rgb_pretrained_model_path` is set to the path of pretrained pytorch weights and the `rgb_pretrained_num_classes` is set to 400 to match with Kinetics-400 classes. 
 
-We provide the [spec]() to finetune I3D model on HMDB51 dataset. You might get ~75% accuracy after the training with following command.
+We provide the [spec](https://github.com/NVIDIA-AI-IOT/tao_toolkit_recipes/blob/main/tao_action_recognition/specs/train_rgb_3d_64_i3d.yaml) to finetune I3D model on HMDB51 dataset. You might get ~75% accuracy after the training with following command.
 
 ```shell
 tao action_recognition train -e /path/to/train_rgb_3d_64_i3d.yaml -k your_key -r /path/to/results 
 ```
 
 ## Export the I3D model
-The exported I3D model could be consumed by TensorRT 8.2.3 and above. We provide the [spec]() to export TAO Toolkit trained I3D model. And you could use the following command to export the model to etlt format:
+The exported I3D model could be consumed by TensorRT 8.2.3 and above. We provide the [spec](https://github.com/NVIDIA-AI-IOT/tao_toolkit_recipes/blob/main/tao_action_recognition/specs/i3d_rgb_3d_64_export.yaml) to export TAO Toolkit trained I3D model. And you could use the following command to export the model to etlt format:
 
 ```shell
 tao action_recognition export -k your_key -e /path/to/i3d_rgb_3d_64_export.yaml 
