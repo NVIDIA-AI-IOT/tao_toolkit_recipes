@@ -1,7 +1,7 @@
-# TensorRT inference sample for TAO FPENet-generic
+# TensorRT inference sample for TAO key points estimation
 
 ## Introduction
-This is a TensorRT inference sample for TAO FPENet-generic. This sample will consume TensorRT engine and json format input generated in FPENet notebook.
+This is a TensorRT inference sample for TAO key points estimation. This sample will consume TensorRT engine and json format input generated in FPENet notebook.
 
 ## Prequisites
 `TensorRT`, `numpy`, `cv2` is needed for this sample. You can try TensorRT docker image on [NGC](https://ngc.nvidia.com/catalog/containers/nvidia:tensorrt) for easily building environment. 
