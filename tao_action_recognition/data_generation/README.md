@@ -67,3 +67,10 @@ unrar x ./video_rar/run.rar ./HMDB51_videos/
 # python split_dataset.py
 
 ```
+
+### Common data process pipeline:
+The data process pipeline in above scripts can be concluded in following diagrams:
+- For RGB-only model:
+![rgb_only_pipe](resources/rgb_preprocess_pipe.png)
+- For OF-only model:
+![of_only_pipe](resources/of_preprocess_pipe.png)
