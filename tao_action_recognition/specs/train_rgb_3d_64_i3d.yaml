@@ -1,5 +1,5 @@
-output_dir: /workspace/exp0_20/rgb_3d_hmdb
-key: nvidia_tlt
+output_dir: ./exp0_20__/rgb_3d_hmdb
+encryption_key: nvidia_tlt
 gpu_ids: [0, 1, 2, 3, 4, 5, 6, 7]
 model_config:
   model_type: rgb
@@ -10,19 +10,17 @@ model_config:
   rgb_pretrained_num_classes: 400
   sample_strategy: consecutive
   sample_rate: 1
-  dropout_ratio: 0.5
 train_config:
   optim:
     lr: 0.01
     momentum: 0.9
-    weight_decay: 0.0005
-    lr_scheduler: MultiStep
+    weight_decay: 0.0000001
     lr_steps: [12, 25]
     lr_decay: 0.1
   epochs: 35
 dataset_config:
-  train_dataset_dir: /workspace/HMDB-51/HMDB51_splitted/train
-  val_dataset_dir: /workspace/HMDB-51/HMDB51_splitted/test
+  train_dataset_dir: /raid/HMDB51_splitted_org/train
+  val_dataset_dir: /raid/HMDB51_splitted_org/test
   label_map:
     throw: 0
     push: 1
@@ -81,8 +79,7 @@ dataset_config:
   batch_size: 8
   workers: 8
   augmentation_config:
-    multi_scale_crop: True
-    scales: [1.0, 0.875]
+    train_crop_type: random_crop
     horizontal_flip_prob: 0.5
     rgb_input_mean: [0.485, 0.456, 0.406]
     rgb_input_std: [0.229, 0.224, 0.225]
