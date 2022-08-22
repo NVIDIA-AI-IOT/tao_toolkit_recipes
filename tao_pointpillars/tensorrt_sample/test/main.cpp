@@ -24,6 +24,8 @@
 #include "cuda_runtime.h"
 #include "./pointpillar.h"
 
+#include <boost/filesystem/convenience.hpp>
+
 #define checkCudaErrors(status)                                   \
 {                                                                 \
   if (status != 0)                                                \
@@ -96,10 +98,11 @@ void parse_args(
   std::string& model_path,
   std::string& engine_path,
   std::string& data_path,
-  std::string& data_type
+  std::string& data_type,
+  std::string& output_path
   ) {
     int c;
-    while ((c = getopt(argc, argv, "c:n:t:m:l:d:e:ph")) != -1) {
+    while ((c = getopt(argc, argv, "c:n:t:m:l:d:e:o:ph")) != -1) {
         switch (c) {
             case 't':
                 {
@@ -131,6 +134,11 @@ void parse_args(
                     data_path = std::string(optarg);
                     break;
                 }
+            case 'o':
+                {
+                    output_path = std::string(optarg);
+                    break;
+                }
             case 'd':
                 {
                     data_type = std::string(optarg);
@@ -147,7 +155,7 @@ void parse_args(
                   std::cout << argv[0] << " -t <nms_iou_thresh>" <<
                    " -c <class_names> -n <pre_nms_top_n>" <<
                    " -l <LIDAR_data_path> -m <model_path>" <<
-                   " -e <engine_path> -d <data_type> -p -h" <<
+                   " -e <engine_path> -d <data_type> -o <output_path> -p -h" <<
                    std::endl;
                   exit(1);
                 }
@@ -168,6 +176,34 @@ std::string model_path;
 std::string engine_path;
 std::string data_path;
 std::string data_type{"fp32"};
+std::string output_path;
+
+
+void SaveBoxPred(std::vector<Bndbox> boxes, std::string file_name)
+{
+    std::ofstream ofs;
+    ofs.open(file_name, std::ios::out);
+    if (ofs.is_open()) {
+        for (const auto box : boxes) {
+          ofs << box.x << " ";
+          ofs << box.y << " ";
+          ofs << box.z << " ";
+          ofs << box.w << " ";
+          ofs << box.l << " ";
+          ofs << box.h << " ";
+          ofs << box.rt << " ";
+          ofs << box.id << " ";
+          ofs << box.score << " ";
+          ofs << "\n";
+        }
+    }
+    else {
+      std::cerr << "Output file cannot be opened!" << std::endl;
+    }
+    ofs.close();
+    std::cout << "Saved prediction in: " << file_name << std::endl;
+    return;
+};
 
 
 int main(int argc, char **argv)
@@ -181,7 +217,8 @@ int main(int argc, char **argv)
     model_path,
     engine_path,
     data_path,
-    data_type
+    data_type,
+    output_path
   );
   assert(data_type == "fp32" || data_type == "fp16");
   std::cout << "Loading Data: " << data_path << std::endl;
@@ -198,8 +235,7 @@ int main(int argc, char **argv)
 
   PointPillar pointpillar(model_path, engine_path, stream, data_type);
 
-  for (int i = 0; i < 3; i++)
-  {
+  
     std::string dataFile = data_path;
     //load points cloud
     unsigned int length = 0;
@@ -212,11 +248,10 @@ int main(int argc, char **argv)
     unsigned int num_point_values = pointpillar.getPointSize();
     unsigned int points_size = length/sizeof(float)/num_point_values;
 
-    std::cout << "Find points num: "<< points_size <<std::endl;
-
     float *points_data = nullptr;
     unsigned int *points_num = nullptr;
     unsigned int points_data_size = points_size * num_point_values * sizeof(float);
+    
     checkCudaErrors(cudaMallocManaged((void **)&points_data, points_data_size));
     checkCudaErrors(cudaMallocManaged((void **)&points_num, sizeof(unsigned int)));
     checkCudaErrors(cudaMemcpy(points_data, points, points_data_size, cudaMemcpyDefault));
@@ -240,13 +275,20 @@ int main(int argc, char **argv)
     checkCudaErrors(cudaFree(points_data));
     checkCudaErrors(cudaFree(points_num));
     std::cout<<"Bndbox objs: "<< nms_pred.size()<<std::endl;
+    
+    
+    std::string bin_file_name = data_path.substr(0, data_path.find_last_of('.'));
+    std::string save_file_name = output_path + bin_file_name.substr(bin_file_name.find_last_of('/') + 1) + ".txt";
+
+    SaveBoxPred(nms_pred, save_file_name);
     nms_pred.clear();
     std::cout << ">>>>>>>>>>>" <<std::endl;
-  }
+  
 
   checkCudaErrors(cudaEventDestroy(start));
   checkCudaErrors(cudaEventDestroy(stop));
   checkCudaErrors(cudaStreamDestroy(stream));
 
   return 0;
-}
+  }
+
