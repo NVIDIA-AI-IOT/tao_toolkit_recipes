@@ -3,6 +3,7 @@ This guide helps run training without network.
 
 ## Step
 In the 1st machine which can connect to internet, assume the training data locates at below path.
+
 `/home/username/`
 
 Run below steps.

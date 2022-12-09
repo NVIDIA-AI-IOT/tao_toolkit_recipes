@@ -1,4 +1,4 @@
-#FAQ
+# FAQ
 
 ## FPENet
 1. *Why is the bounding box recalculated just using the key points when I have also supplied the face bbox ground truth in the annotation file ? What is the purpose of the bbox in the ground truth file?*
