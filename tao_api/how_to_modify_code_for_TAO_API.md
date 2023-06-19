@@ -12,10 +12,10 @@ $ docker run -it --name tao-api-fixed nvcr.io/nvidia/tao/tao-toolkit:4.0.0-api /
 Open another terminal. You need to build a new docker image based on nvcr.io/nvidia/tao/tao-toolkit:4.0.0-api.
 First, create a folder, copy the file from the container to your local host, and modify it as below.
 ```
-morganh@host:~$ mkdir docker_build && cd docker_build
-morganh@host:~/docker_build$ docker cp tao-api-fixed:/opt/api ./
-morganh@host:~/docker_build$ cd api
-morganh@host:~/docker_build/api$ vim handlers/actions.py
+nvidia@host:~$ mkdir docker_build && cd docker_build
+nvidia@host:~/docker_build$ docker cp tao-api-fixed:/opt/api ./
+nvidia@host:~/docker_build$ cd api
+nvidia@host:~/docker_build/api$ vim handlers/actions.py
 ```
 
 Go to line:779 and change the code from
@@ -51,7 +51,7 @@ else:
 
 Change docker_images.py and change the code
 ```shell
-morganh@host:~/docker_build/api$ vim handlers/docker_images.py
+nvidia@host:~/docker_build/api$ vim handlers/docker_images.py
 ```
 Go to line 23 and replace the docker image name from
 ```shell
@@ -66,13 +66,13 @@ To
 ## Generate a new docker
 Create a Dockerfile
 ```shell
-morganh@host:~/docker_build/api$ mv Dockerfile Dockerfile_bak
-morganh@host:~/docker_build/api$ vim Dockerfile
+nvidia@host:~/docker_build/api$ mv Dockerfile Dockerfile_bak
+nvidia@host:~/docker_build/api$ vim Dockerfile
 ```
 
 Below is the content of Dockerfile
 ```shell
-morganh@host:~/docker_build/api$ cat Dockerfile
+nvidia@host:~/docker_build/api$ cat Dockerfile
 ################ BUILD IMAGE #################
 FROM nvcr.io/nvidia/tao/tao-toolkit:4.0.0-api
 # Copy project files
@@ -85,7 +85,7 @@ CMD /bin/bash app_start.sh
 ```
 
 ```shell
-morganh@host:~/docker_build/api$ docker build . -t nvcr.io/nvidia/tao/tao-toolkit:4.0.0-api-fix
+nvidia@host:~/docker_build/api$ docker build . -t nvcr.io/nvidia/tao/tao-toolkit:4.0.0-api-fix
 ```
 
 ## Save the docker to tar file
