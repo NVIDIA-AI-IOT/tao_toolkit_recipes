@@ -13,7 +13,7 @@ Please do try more parameters for best model performance.
 
 ## Detailed Steps
 
-* Download kitti dataset
+### Download kitti dataset
 
 Assume link below has the txt label files:
 ```
@@ -21,7 +21,8 @@ Assume link below has the txt label files:
 ```
 
 
-* Prepare parameters for sample to estimate optimal values
+
+### Prepare parameters for sample to estimate optimal values
 
 Change 'folder' in tao_retinanet_scales_aspect_ratio_estimate.py to point to correct folder for labels.
 
@@ -30,13 +31,17 @@ Change 'shorter_length_of_image' in tao_retinanet_scales_aspect_ratio_estimate.p
 Change 'limit_max_ar' in tao_retinanet_scales_aspect_ratio_estimate.py to remove outliers for aspect ratios
 
 
-* Run parameters for sample to estimate optimal values
+
+
+### Run parameters for sample to estimate optimal values
 
 ```
 python tao_retinanet_scales_aspect_ratio_estimate.py
 ```
 
-* Running log with kitti dataset
+
+
+### Running log with kitti dataset
 
 
 ```
