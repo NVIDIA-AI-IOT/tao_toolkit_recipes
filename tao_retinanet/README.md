@@ -43,7 +43,7 @@ limit_max_ar=4
 
 
 
-### Run parameters for sample to estimate optimal values
+### Run sample to estimate optimal values
 
 ```
 python tao_retinanet_scales_aspect_ratio_estimate.py
