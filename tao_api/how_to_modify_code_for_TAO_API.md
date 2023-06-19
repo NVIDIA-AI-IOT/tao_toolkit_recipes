@@ -88,7 +88,7 @@ CMD /bin/bash app_start.sh
 morganh@host:~/docker_build/api$ docker build . -t nvcr.io/nvidia/tao/tao-toolkit:4.0.0-api-fix
 ```
 
-## Save the docker to tar file.
+## Save the docker to tar file
 ```shell
 $ docker save -o tao-api.tar nvcr.io/nvidia/tao/tao-toolkit:4.0.0-api-fix
 ```
@@ -104,12 +104,13 @@ In k8s machines,
 $ sudo ctr -n=k8s.io image import tao-api.tar
 ```
 
-## Install the new chart
+## Delete the old pods
 Delete existing tao-toolkit-api pods
 ```shell
 $ helm delete tao-toolkit-api
 ```
 
+## Download chart and modify
 Download latest helm chart.
 ```shell
 $ helm fetch https://helm.ngc.nvidia.com/nvidia/tao/charts/tao-toolkit-api-4.0.2.tgz --username=‘$oauthtoken’ --password=<NGC key>
