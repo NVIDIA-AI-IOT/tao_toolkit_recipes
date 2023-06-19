@@ -26,7 +26,7 @@ Assume link below has the txt label files:
 
 #### Change tao_retinanet_scales_aspect_ratio_estimate.py to point to correct folder for labels
 ```
-folder="/home/luwu/tlt-experiments/data/training/label_2/"
+folder="/home/user/tlt-experiments/data/training/label_2/"
 ```
 
 
