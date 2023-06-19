@@ -24,12 +24,22 @@ Assume link below has the txt label files:
 
 ### Prepare parameters for sample to estimate optimal values
 
-Change 'folder' in tao_retinanet_scales_aspect_ratio_estimate.py to point to correct folder for labels.
+#### Change tao_retinanet_scales_aspect_ratio_estimate.py to point to correct folder for labels
+```
+folder="/home/luwu/tlt-experiments/data/training/label_2/"
+```
 
-Change 'shorter_length_of_image' in tao_retinanet_scales_aspect_ratio_estimate.py
 
-Change 'limit_max_ar' in tao_retinanet_scales_aspect_ratio_estimate.py to remove outliers for aspect ratios
+#### Change tao_retinanet_scales_aspect_ratio_estimate.py to set shorten value of image width and image height
+```
+shorter_length_of_image = 375
+```
 
+
+##### Change tao_retinanet_scales_aspect_ratio_estimate.py to remove outliers for aspect ratios
+```
+limit_max_ar=4
+```
 
 
 
