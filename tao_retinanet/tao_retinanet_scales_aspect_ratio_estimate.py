@@ -30,7 +30,7 @@ limit_max_ar=4
 # 004156.jpg: JPEG image data, JFIF standard 1.01, aspect ratio, density 1x1, segment length 16, baseline, precision 8, 1242x375, frames 3
 shorter_length_of_image = 375
 
-folder="/home/luwu/tlt-experiments/data/training/label_2/"
+folder="/home/user/tlt-experiments/data/training/label_2/"
 widths=[]
 heights=[]
 files=[]
