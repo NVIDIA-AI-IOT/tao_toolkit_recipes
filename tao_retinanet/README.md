@@ -55,7 +55,11 @@ python tao_retinanet_scales_aspect_ratio_estimate.py
 
 
 ```
-scales:  [0.0691874  0.13098365 0.21473368 0.33218772 0.48606437 0.82403735]
-aspect ratios:  [0.52757496 0.95228595 2.57963582]
+scales:
+     [0.0691874  0.13098365 0.21473368 0.33218772 0.48606437 0.82403735]
+aspect ratios from algo
+     [0.52653116 1.36425734 2.43270715]
+aspect ratios considering 1.0:
+     [0.52653116 1.         2.43270715]
 ```
 
