@@ -30,7 +30,7 @@ limit_max_ar=4
 # 004156.jpg: JPEG image data, JFIF standard 1.01, aspect ratio, density 1x1, segment length 16, baseline, precision 8, 1242x375, frames 3
 shorter_length_of_image = 375
 
-folder="/home/user/tlt-experiments/data/training/label_2/"
+folder="/home/luwu/tlt-experiments/data/training/label_2/"
 widths=[]
 heights=[]
 files=[]
@@ -70,7 +70,7 @@ for i in range(len(widths)):
         
     scales.append(scale)
     
-    ar=h/w
+    ar=w/h
     if ar<limit_max_ar:
         aspect_ratios.append(ar)
 
@@ -79,11 +79,20 @@ x=x.reshape(x.shape[0], 1)
 kmeans = KMeans(n_clusters=num_scales_retinanet, random_state=0, n_init="auto").fit(x)
 centers=kmeans.cluster_centers_
 centers=np.squeeze(centers, axis=1)
-print("scales: ", np.sort(centers))
+print("scales: ")
+print("    ", np.sort(centers))
 
 x=np.array(aspect_ratios)
 x=x.reshape(x.shape[0], 1)
 kmeans = KMeans(n_clusters=num_ars_retinanet, random_state=0, n_init="auto").fit(x)
 centers=kmeans.cluster_centers_
 centers=np.squeeze(centers, axis=1)
-print("aspect ratios: ", np.sort(centers))
+print("aspect ratios from algo")
+print("    ", np.sort(centers))
+
+centers=np.sort(centers)
+centers_abs = np.abs(centers-1.0)
+idx_min_distance_from_1 = centers_abs.argmin()
+centers[idx_min_distance_from_1] = 1.0
+print("aspect ratios considering 1.0: ")
+print("    ", np.sort(centers))
