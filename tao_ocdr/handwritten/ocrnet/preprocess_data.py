@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
             try:
                 crop_img = img[ymin:ymax, xmin:xmax, :]
-                target_img_path = os.path.join(target_dir, f"{img_id}_{idx}.jpg")
+                target_img_path = f"{img_id}_{idx}.jpg"
                 p_gt_file.write(target_img_path + "\t" + text + "\n")
                 cv2.imwrite(target_img_path, crop_img)
             except Exception as err:
