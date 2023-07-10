@@ -97,7 +97,7 @@ if __name__ == "__main__":
                 crop_img = img[ymin:ymax, xmin:xmax, :]
                 target_img_path = f"{img_id}_{idx}.jpg"
                 p_gt_file.write(target_img_path + "\t" + text + "\n")
-                cv2.imwrite(target_img_path, crop_img)
+                cv2.imwrite(os.path.join(target_dir, target_img_path), crop_img)
             except Exception as err:
                 print(err)
                 print(f"img_id: {img_id} bbox: {vs} img_shape: {img.shape}")
