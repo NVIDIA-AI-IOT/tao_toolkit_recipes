@@ -1,0 +1,14 @@
+model:
+  load_pruned_graph: False
+  pruned_graph_path: '/results/prune/pruned_0.1.pth'
+
+export:
+  results_dir: /results/ocd/export
+  checkpoint: '/results/train/model_best.pth'
+  onnx_file: '/results/export/model_best.onnx'
+  width: 1024
+  height: 1024
+
+dataset:
+  validate_dataset:
+      data_path: ['/data/ocdnet/iamdata/test']
