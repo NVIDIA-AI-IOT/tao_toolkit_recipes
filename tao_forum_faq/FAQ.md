@@ -70,7 +70,8 @@ Then, decode the etlt file with following command.
 
 ## Segformer
 1. *How to train multiclass?*
-Refence: https://forums.developer.nvidia.com/t/training-segformer-cradiov2-with-multiple-classes-not-working-only-learning-1-class.
+
+Reference: https://forums.developer.nvidia.com/t/training-segformer-cradiov2-with-multiple-classes-not-working-only-learning-1-class.
 
 Please change 1-channel mask png file to 3-channel mask png file.
 
